@@ -5,7 +5,11 @@ class Main
     attr_reader :file
 
     def initialize(file)
-        @file = File.readlines(file, chomp: true)
+        begin
+            @file = File.readlines(file, chomp: true)
+        rescue Errno::ENOENT
+            puts "File doesn't exist."
+        end
     end
 
     def getFirstLine
