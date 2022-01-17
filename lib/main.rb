@@ -18,3 +18,5 @@ class Main
     end
     
 end
+
+Main.new("../games.log").getFirstLine
