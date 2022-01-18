@@ -1,3 +1,3 @@
-require './manipulateFile'
+require './manipulate_file'
 
-print ManipulateFile.new("../games.log").getFirstLine
+print ManipulateFile.new("../games.log").get_first_line
