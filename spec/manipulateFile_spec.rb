@@ -1,21 +1,21 @@
-require 'main'
+require 'manipulateFile'
 
-describe 'Main' do
-    it 'should read the first line of the file and print into screen' do   
+describe 'ManipulateFile' do
+    it 'should read the first line of the file' do   
         @content = "Test 1,2,3"
 
         arq = File.new("test.log","w")
         arq.puts @content
         arq.close
 
-        main = Main.new(arq)
+        main = ManipulateFile.new(arq)
 
         expect(main.getFirstLine).to eq(@content)
     end
 
     it 'should treat error when file doesn`t exist' do
         arq = "teste"
-        main = Main.new(arq)
+        main = ManipulateFile.new(arq)
 
         expect(main.file).to eq(nil)
     end
