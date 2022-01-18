@@ -11,8 +11,11 @@ class ManipulateFile
     end
 
     def getFirstLine
-        print self.file[0]
-        return self.file[0]
+        self.file[0]
+    end
+
+    def qtyLines
+        self.file.length()
     end
     
 end
