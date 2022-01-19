@@ -4,9 +4,9 @@ class ManipulateFile
 
   def initialize(file)
     begin
-        @file = File.readlines(file, chomp: true)
+      @file = File.readlines(file, chomp: true)
     rescue Errno::ENOENT
-        puts "File doesn't exist."
+      raise "File doesn't exist."
     end
   end
 

@@ -11,8 +11,8 @@ describe '#get_first_line' do
     
   it 'treat error when file doesn`t exist' do
     arq = "teste"
-    main = ManipulateFile.new(arq)
+     
+    expect { ManipulateFile.new(arq) }.to raise_error("File doesn't exist.")
 
-    expect(main.file).to eq(nil)
   end
 end 
