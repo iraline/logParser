@@ -9,7 +9,7 @@ class ManipulateFile
         @file = File.readlines(file, chomp: true)
         @name = File.basename(file)
     rescue Errno::ENOENT
-        puts "File doesn't exist."
+      raise "File doesn't exist."
     end
   end
 
