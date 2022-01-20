@@ -24,4 +24,20 @@ class ManipulateFile
   def mount_json(obj)
     JSON.pretty_generate(obj)
   end
+
+  def get_players_name
+    players = []
+    for element in self.file do
+      if element.include?('ClientUserinfoChanged:')
+        player = element.split("\\")
+        if not players.include?(player[1])
+          players.append(player[1])
+        end
+      end
+    end
+    return players
+  end
+
 end
+
+
