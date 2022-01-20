@@ -35,6 +35,16 @@ describe '#mount_json' do
 
     expect(main.mount_json(obj)).to eq(JSON.pretty_generate(obj))
   end
+end
+
+describe '#get_players_name' do
+  it 'get the players name' do   
+    @content = ["Test1","Test2","Test3"]
+
+    main = ManipulateFile.new("test.txt")
+
+    expect(main.get_players_name).to eq(@content)
+  end
 end 
 
 
