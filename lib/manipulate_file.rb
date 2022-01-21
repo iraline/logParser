@@ -40,23 +40,27 @@ class ManipulateFile
 
   def get_players_kills
     kills = Hash[]
+    x = 0
     for element in self.file do
       if element.include?('Kill:')
-        kill = element.split(" ") #campos 5 e 6
+        kill = element.split(" ") 
         if !kill[5].include?("<world>") 
           if kills.include?(kill[5])
-            kills[kill[5]] = kills[kill[5]] + 1
+            kills[kill[5]] += 1
           else
             kills[kill[5]] = 1
           end
+        else 
+          if kills.include?(kill[7])
+            kills[kill[7]] -= 1
+          else
+            kills[kill[7]] = -1
+          end
         end
+        x +=1
       end
     end
-    x = 0
-    for element in kills do
-      x = x +element[1]
-    end
-    return [kills,x]
+    [kills,x]
   end
 
 end
