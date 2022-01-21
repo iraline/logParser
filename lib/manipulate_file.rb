@@ -14,21 +14,12 @@ class ManipulateFile
   end
 
   def get_first_line
-    self.file[0]
-  end
-
-  def qty_lines
-    self.file.length()
-  end
-
-  def mount_json(lines,players)
-    obj = { self.name => { "lines" => lines, "players" => players} }
-    JSON.pretty_generate(obj)
+    @file[0]
   end
 
   def get_players_name
     players = []
-    for element in self.file do
+    for element in @file do
       if element.include?('ClientUserinfoChanged:')
         player = element.split("\\")
         if not players.include?(player[1])
@@ -39,6 +30,9 @@ class ManipulateFile
     return players
   end
 
+  def mount_json
+    obj = { @name => { "lines" => @file.length, "players" => self.get_players_name} }
+    JSON.pretty_generate(obj)
+  end
+
 end
-
-

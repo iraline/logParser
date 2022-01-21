@@ -18,26 +18,6 @@ describe ManipulateFile do
     end
   end 
 
-  describe '#qty_lines' do
-    it 'read number of lines of a file' do   
-
-      main = ManipulateFile.new("test.txt")
-
-      expect(main.qty_lines).to be > 0
-    end
-  end 
-
-  describe '#mount_json' do
-    it 'create a json object' do   
-      
-      main = ManipulateFile.new("test.txt")
-
-      obj = { main.name => { "lines" => main.qty_lines, "players" => main.get_players_name} }
-
-      expect(main.mount_json(main.qty_lines,main.get_players_name)).to eq(JSON.pretty_generate(obj))
-    end
-  end
-
   describe '#get_players_name' do
     it 'get the players name' do   
       @content = ["Test1","Test2","Test3"]
@@ -47,4 +27,16 @@ describe ManipulateFile do
       expect(main.get_players_name).to eq(@content)
     end
   end 
+
+  describe '#mount_json' do
+    it 'create a json object' do   
+      
+      main = ManipulateFile.new("test.txt")
+
+      obj = { main.name => { "lines" => main.file.length, "players" => main.get_players_name} }
+
+      expect(main.mount_json).to eq(JSON.pretty_generate(obj))
+    end
+  end
+
 end
