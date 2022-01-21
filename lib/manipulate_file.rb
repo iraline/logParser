@@ -21,7 +21,8 @@ class ManipulateFile
     self.file.length()
   end
 
-  def mount_json(obj)
+  def mount_json(lines,players)
+    obj = { self.name => { "lines" => lines, "players" => players} }
     JSON.pretty_generate(obj)
   end
 
