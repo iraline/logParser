@@ -38,6 +38,27 @@ class ManipulateFile
     return players
   end
 
+  def get_players_kills
+    kills = Hash[]
+    for element in self.file do
+      if element.include?('Kill:')
+        kill = element.split(" ") #campos 5 e 6
+        if !kill[5].include?("<world>") 
+          if kills.include?(kill[5])
+            kills[kill[5]] = kills[kill[5]] + 1
+          else
+            kills[kill[5]] = 1
+          end
+        end
+      end
+    end
+    x = 0
+    for element in kills do
+      x = x +element[1]
+    end
+    return [kills,x]
+  end
+
 end
 
 
