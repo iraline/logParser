@@ -17,12 +17,8 @@ class ManipulateFile
     self.file[0]
   end
 
-  def qty_lines
-    self.file.length()
-  end
-
-  def mount_json(lines)
-    obj = { self.name => { "lines" => lines} }
+  def mount_json
+    obj = { @name => { "lines" => @file.length()} }
     JSON.pretty_generate(obj)
   end
 
