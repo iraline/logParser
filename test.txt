@@ -2,3 +2,5 @@ Test 1,2,3
 'ClientUserinfoChanged:' \Test1
 'ClientUserinfoChanged:' \Test2
 'ClientUserinfoChanged:' \Test3
+2:22 Kill: 3 2 10: Test1 killed Dono da Bola by MOD_RAILGUN
+2:22 Kill: 3 2 10: Test2 killed Dono da Bola by MOD_RAILGUN

@@ -47,4 +47,13 @@ describe '#get_players_name' do
   end
 end 
 
+describe '#get_players_kills' do
+  it 'get quantity of kills from each player and de sum of all' do   
+    @content = [{"Test1"=> 1 , "Test2"=> 1},2]
+
+    main = ManipulateFile.new("test.txt")
+
+    expect(main.get_players_kills).to eq(@content)
+  end
+end 
 
