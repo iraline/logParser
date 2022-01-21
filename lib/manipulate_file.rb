@@ -45,9 +45,9 @@ class ManipulateFile
       if element.include?('Kill:')
         kill = element.split(" ") #campos 5 e 6
         if !kill[5].include?("<world>")
-          x = x + 1
+          x +=1
           if kills.include?(kill[5])
-            kills[kill[5]] = kills[kill[5]] + 1
+            kills[kill[5]] += 1
           else
             kills[kill[5]] = 1
           end
