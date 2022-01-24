@@ -2,4 +2,6 @@
 
 require './manipulate_file'
 
-print ManipulateFile.new('../games.log').show_first_line
+file = ManipulateFile.new('../games.log')
+
+puts file.mount_json
