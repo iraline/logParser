@@ -23,7 +23,7 @@ describe ManipulateFile do
       
       main = ManipulateFile.new("test.txt")
     
-      obj = { main.name => { "lines" => main.file.length} }
+      obj = { "test.txt" => { "lines" => 1} }
 
       expect(main.mount_json).to eq(JSON.pretty_generate(obj))
     end
