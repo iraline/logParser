@@ -31,8 +31,9 @@ class ManipulateFile
   end
 
   def mount_json
-    obj = { @name => { "lines" => @file.length, "players" => self.get_players_name} }
+    obj = { @name => { "lines" => @file.length, "players" => get_players_name} }
     JSON.pretty_generate(obj)
   end
 
-end
+  private :get_players_name
+end 

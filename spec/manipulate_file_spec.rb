@@ -18,22 +18,12 @@ describe ManipulateFile do
     end
   end 
 
-  describe '#get_players_name' do
-    it 'get the players name' do   
-      @content = ["Test1","Test2","Test3"]
-  
-      main = ManipulateFile.new("test.txt")
-  
-      expect(main.get_players_name).to eq(@content)
-    end
-  end 
-
   describe '#mount_json' do
     it 'create a json object' do   
-      
+      @content = ["Test1","Test2","Test3"]
       main = ManipulateFile.new("test.txt")
 
-      obj = { main.name => { "lines" => main.file.length, "players" => main.get_players_name} }
+      obj = { "test.txt" => { "lines" => 4, "players" => @content} }
 
       expect(main.mount_json).to eq(JSON.pretty_generate(obj))
     end
