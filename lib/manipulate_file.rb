@@ -1,16 +1,15 @@
+# frozen_string_literal: true
 require 'json'
 
+# Class to help manipulate a file
 class ManipulateFile
-    
-  attr_reader :file, :name
+  attr_reader :file
 
   def initialize(file)
-    begin
-        @file = File.readlines(file, chomp: true)
-        @name = File.basename(file)
-    rescue Errno::ENOENT
-      raise "File doesn't exist."
-    end
+    @file = File.readlines(file, chomp: true)
+    @name = File.basename(file)
+  rescue Errno::ENOENT
+    raise 'File doesn`t exist.'
   end
 
   def show_first_line
@@ -19,21 +18,19 @@ class ManipulateFile
 
   def show_players_name
     players = []
-    for line in @file do
-      if line.include?('ClientUserinfoChanged:')
-        player = line.split("\\")
-        unless players.include?(player[1])
-          players.append(player[1])
-        end
-      end
+    @file.each do |line|
+      next unless line.include?('ClientUserinfoChanged:')
+
+      player = line.split('\\')
+      players.append(player[1]) unless players.include?(player[1])
     end
-    return players
+    players
   end
 
   def mount_json
-    obj = { @name => { "lines" => @file.length, "players" => show_players_name} }
+    obj = { @name => { 'lines' => @file.length, 'players' => show_players_name } }
     JSON.pretty_generate(obj)
   end
 
   private :show_players_name
-end 
+end
