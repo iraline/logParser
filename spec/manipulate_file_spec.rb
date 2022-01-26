@@ -1,13 +1,13 @@
 require 'manipulate_file'
 
 describe ManipulateFile do 
-  describe '#get_first_line' do
+  describe '#show_first_line' do
     it 'read the first line of the file' do   
       @content = "Test 1,2,3"
 
       main = ManipulateFile.new("test.txt")
 
-      expect(main.get_first_line).to eq(@content)
+      expect(main.show_first_line).to eq(@content)
     end
       
     it 'treat error when file doesn`t exist' do
