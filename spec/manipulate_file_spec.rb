@@ -19,14 +19,14 @@ describe ManipulateFile do
     end
   end
 
-  describe '#mount_json' do
-    it 'create a json object' do
-      @content = %w[Test1 Test2 Test3]
+  describe '#mount_object' do
+    it 'create a response object' do
+      @content = ['Test1','Test2','Test3']
       main = ManipulateFile.new('test.txt')
 
       obj = { 'test.txt' => { 'lines' => 4, 'players' => @content } }
 
-      expect(main.mount_json).to eq(JSON.pretty_generate(obj))
+      expect(main.mount_object).to eq(obj)
     end
   end
 end
