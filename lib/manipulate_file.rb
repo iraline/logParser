@@ -16,6 +16,12 @@ class ManipulateFile
     @file[0]
   end
 
+  def mount_object
+    obj = { @name => { 'lines' => @file.length, 'players' => show_players_name } }
+  end
+
+  private 
+ 
   def show_players_name
     players = []
     @file.each do |line|
@@ -27,9 +33,4 @@ class ManipulateFile
     players
   end
 
-  def mount_object
-    obj = { @name => { 'lines' => @file.length, 'players' => show_players_name } }
-  end
-
-  private :show_players_name
 end

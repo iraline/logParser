@@ -5,11 +5,10 @@ require 'manipulate_file'
 describe ManipulateFile do
   describe '#show_first_line' do
     it 'read the first line of the file' do
-      @content = 'Test 1,2,3'
      
       main = ManipulateFile.new("test.txt")
      
-      expect(main.show_first_line).to eq(@content)
+      expect(main.show_first_line).to eq('Test 1,2,3')
     end
 
     it 'treat error when file doesn`t exist' do
@@ -21,10 +20,10 @@ describe ManipulateFile do
 
   describe '#mount_object' do
     it 'create a response object' do
-      @content = ['Test1','Test2','Test3']
+
       main = ManipulateFile.new('test.txt')
 
-      obj = { 'test.txt' => { 'lines' => 4, 'players' => @content } }
+      obj = { 'test.txt' => { 'lines' => 5, 'players' => ['Test1','Test2','Test3'] } }
 
       expect(main.mount_object).to eq(obj)
     end

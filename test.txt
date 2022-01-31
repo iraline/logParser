@@ -2,3 +2,4 @@ Test 1,2,3
 'ClientUserinfoChanged:' \Test1
 'ClientUserinfoChanged:' \Test2
 'ClientUserinfoChanged:' \Test3
+'ClientUserinfoChanged:' \Test3
