@@ -23,7 +23,7 @@ describe ManipulateFile do
 
       main = ManipulateFile.new('test.txt')
 
-      obj = { 'test.txt' => { 'lines' => 6, 'players' => ['Test1','Test2','Test3'] } }
+      obj = { 'test.txt' => { 'lines' => 4, 'players' => ['Test1','Test2','Test3'] } }
 
       expect(main.mount_object).to eq(obj)
     end
