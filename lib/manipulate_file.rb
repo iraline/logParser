@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'json'
 
 # Class to help manipulate a file
 class ManipulateFile
@@ -8,15 +9,28 @@ class ManipulateFile
     @file = File.readlines(file, chomp: true)
     @name = File.basename(file)
   rescue Errno::ENOENT
-    raise "File doesn't exist."
+    raise 'File doesn`t exist.'
   end
 
   def show_first_line
-    file[0]
+    @file[0]
   end
 
-  def mount_json
-    obj = { @name => { 'lines' => @file.length } }
-    JSON.pretty_generate(obj)
+  def mount_object
+    obj = { @name => { 'lines' => @file.length, 'players' => show_players_name } }
   end
+
+  private 
+ 
+  def show_players_name
+    players = []
+    @file.each do |line|
+      next unless line.include?('ClientUserinfoChanged:')
+
+      player = line.split('\\')
+      players.append(player[1]) unless players.include?(player[1])
+    end
+    players
+  end
+
 end

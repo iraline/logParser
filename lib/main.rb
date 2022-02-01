@@ -4,4 +4,4 @@ require './manipulate_file'
 
 file = ManipulateFile.new('../games.log')
 
-puts file.mount_json
+puts JSON.pretty_generate(file.mount_object)
