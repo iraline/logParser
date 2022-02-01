@@ -1,41 +1,36 @@
+# frozen_string_literal: true
 require 'json'
 
+# Class to help manipulate a file
 class ManipulateFile
-    
-  attr_reader :file, :name
+  attr_reader :file
 
   def initialize(file)
-    begin
-        @file = File.readlines(file, chomp: true)
-        @name = File.basename(file)
-    rescue Errno::ENOENT
-      raise "File doesn't exist."
-    end
+    @file = File.readlines(file, chomp: true)
+    @name = File.basename(file)
+  rescue Errno::ENOENT
+    raise 'File doesn`t exist.'
   end
 
-  def get_first_line
-    self.file[0]
+  def show_first_line
+    @file[0]
   end
 
-  def qty_lines
-    self.file.length()
+  def mount_object
+    obj = { @name => { 'lines' => @file.length, 'players' => show_players_name } }
   end
 
-  def mount_json(obj)
-    JSON.pretty_generate(obj)
-  end
-
-  def get_players_name
+  private 
+ 
+  def show_players_name
     players = []
-    for element in self.file do
-      if element.include?('ClientUserinfoChanged:')
-        player = element.split("\\")
-        if not players.include?(player[1])
-          players.append(player[1])
-        end
-      end
+    @file.each do |line|
+      next unless line.include?('ClientUserinfoChanged:')
+
+      player = line.split('\\')
+      players.append(player[1]) unless players.include?(player[1])
     end
-    return players
+    players
   end
 
   def get_players_kills
@@ -43,8 +38,8 @@ class ManipulateFile
     x = 0
     for element in self.file do
       if element.include?('Kill:')
-        kill = element.split(" ") 
-        if !kill[5].include?("<world>")
+        kill = element.split(' ') 
+        if !kill[5].include?('<world>')
           x +=1
           if kills.include?(kill[5])
             kills[kill[5]] += 1
@@ -58,5 +53,3 @@ class ManipulateFile
   end
 
 end
-
-
