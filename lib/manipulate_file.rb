@@ -17,6 +17,14 @@ class ManipulateFile
     @file[0]
   end
 
+  def mount_object
+    kills = show_players_kills
+    { @name => { 'lines' => @file.length, 'players' => show_players_name, 'kills' => kills[0],
+                 'total_kills' => kills[1] } }
+  end
+
+  private
+
   def show_players_kills
     kills = Hash[]
     x = 0
@@ -35,14 +43,6 @@ class ManipulateFile
     end
     [kills,x]
   end
-
-  def mount_object
-    kills = show_players_kills
-    { @name => { 'lines' => @file.length, 'players' => show_players_name, 'kills' => kills[0],
-                 'total_kills' => kills[1] } }
-  end
-
-  private
 
   def show_players_name
     players = []

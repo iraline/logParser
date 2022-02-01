@@ -27,12 +27,4 @@ describe ManipulateFile do
     end
   end
 
-  describe '#show_players_kills' do
-    it 'show quantity of kills from each player and de sum of all' do
-      main = ManipulateFile.new('test.txt')
-  
-      expect(main.show_players_kills).to eq([{ 'Test1' => 1, 'Test2' => 1 }, 2])
-    end
-  end
-
 end
