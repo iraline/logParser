@@ -34,32 +34,34 @@ class ManipulateFile
   def show_players_kills
     kills = Hash[]
     count = 0
-    for element in @file do
-      if element.include?('Kill:')
-        kill = element.split(" ") 
-        if !kill[5].include?("<world>")
-          count +=1
-          if kills.include?(kill[5])
-            kills[kill[5]] += 1
-          else
-            kills[kill[5]] = 1
-          end
-        end
-      end
+   
+    @file.each do |line|
+      next unless line.include?('Kill:')
+      
+      killer = line.split(" ")[5]
+      
+      next if killer.include?("<world>")
+      
+      count +=1
+      kills[killer] = kills.fetch(killer,0) + 1
     end
+
     [kills,count]
   end
 
   def show_players_name
     players = []
-    @file.each do |element|
-      if element.include?('ClientUserinfoChanged:')
-        player = element.split('\\')
-        if not players.include?(player[1])
-          players.append(player[1])
-        end
-      end
+
+    @file.each do |line|
+      next unless line.include?('ClientUserinfoChanged:')
+
+      player = line.split('\\')[1]
+      
+      next if players.include?(player)
+
+      players.append(player)
     end
+    
     players
   end
 
