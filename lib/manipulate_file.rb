@@ -33,12 +33,12 @@ class ManipulateFile
 
   def show_players_kills
     kills = Hash[]
-    x = 0
+    count = 0
     for element in @file do
       if element.include?('Kill:')
         kill = element.split(" ") 
         if !kill[5].include?("<world>")
-          x +=1
+          count +=1
           if kills.include?(kill[5])
             kills[kill[5]] += 1
           else
@@ -47,7 +47,7 @@ class ManipulateFile
         end
       end
     end
-    [kills,x]
+    [kills,count]
   end
 
   def show_players_name
