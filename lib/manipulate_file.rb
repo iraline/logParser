@@ -18,9 +18,15 @@ class ManipulateFile
   end
 
   def mount_object
-    kills = show_players_kills
-    { @name => { 'lines' => @file.length, 'players' => show_players_name, 'kills' => kills[0],
-                 'total_kills' => kills[1] } }
+    kills, total_kills = show_players_kills
+    { 
+      @name => { 
+      'lines' => @file.length, 
+      'players' => show_players_name, 
+      'kills' => kills,
+      'total_kills' => total_kills 
+      } 
+    }
   end
 
   private
@@ -28,7 +34,7 @@ class ManipulateFile
   def show_players_kills
     kills = Hash[]
     x = 0
-    for element in self.file do
+    for element in @file do
       if element.include?('Kill:')
         kill = element.split(" ") 
         if !kill[5].include?("<world>")
@@ -54,7 +60,7 @@ class ManipulateFile
         end
       end
     end
-    return players
+    players
   end
 
 end
