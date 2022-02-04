@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'json'
 
 # Class to help manipulate a file
@@ -17,19 +18,50 @@ class ManipulateFile
   end
 
   def mount_object
-    obj = { @name => { 'lines' => @file.length, 'players' => show_players_name } }
+    kills, total_kills = show_players_kills
+    { 
+      @name => { 
+      'lines' => @file.length, 
+      'players' => show_players_name, 
+      'kills' => kills,
+      'total_kills' => total_kills 
+      } 
+    }
   end
 
-  private 
- 
+  private
+
+  def show_players_kills
+    kills = Hash[]
+    count = 0
+   
+    @file.each do |line|
+      next unless line.include?('Kill:')
+      
+      killer = line.split(" ")[5]
+      
+      next if killer.include?("<world>")
+      
+      count +=1
+      kills[killer] = kills.fetch(killer,0) + 1
+    end
+
+    [kills,count]
+  end
+
   def show_players_name
     players = []
+
     @file.each do |line|
       next unless line.include?('ClientUserinfoChanged:')
 
-      player = line.split('\\')
-      players.append(player[1]) unless players.include?(player[1])
+      player = line.split('\\')[1]
+      
+      next if players.include?(player)
+
+      players.append(player)
     end
+    
     players
   end
 
