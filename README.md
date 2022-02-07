@@ -30,3 +30,15 @@ You can run the test file getting into the directory and enter the command
 ```
 bin/rspec
 ```
+
+# How to Run Rubocop
+You can run the entering the command
+```
+rubocop -A
+```
+
+# How to Run SimpleCov
+You can run entering the command
+```
+xdg-open coverage/index.htmlo 
+```
