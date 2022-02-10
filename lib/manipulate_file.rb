@@ -9,7 +9,7 @@ class ManipulateFile
   def initialize(file)
     @file = File.readlines(file, chomp: true)
     @name = File.basename(file)
-  rescue Errno::ENOENT
+    rescue Errno::ENOENT
     raise 'File doesn`t exist.'
   end
 
@@ -34,18 +34,16 @@ class ManipulateFile
   def show_players_kills
     kills = Hash[]
     count = 0
-   
     @file.each do |line|
       next unless line.include?('Kill:')
-      
-      killer = line.split(" ")[5]
-      
-      next if killer.include?("<world>")
-      
-      count +=1
-      kills[killer] = kills.fetch(killer,0) + 1
+      kill = line.split(' ') 
+      unless kill[5].include?('<world>') 
+        kills[kill[5]] = kills.fetch(kill[5],0) + 1
+      else 
+        kills[kill[7]] = kills.fetch(kill[7],0) - 1
+      end
+      count +=1  
     end
-
     [kills,count]
   end
 
@@ -64,5 +62,4 @@ class ManipulateFile
     
     players
   end
-
 end
